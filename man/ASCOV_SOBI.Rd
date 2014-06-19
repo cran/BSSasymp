@@ -43,9 +43,9 @@ time series, \emph{Statistics and Probability Letters}, 82, 1865--1873.}
 \cite{Miettinen, J., Nordhausen, K., Oja, H. and Taskinen, S. (2014),
 Deflation-based separation of uncorrelated stationary time series, \emph{Journal of Multivariate Analysis}, 123, 214--227.}
 
-\cite{Miettinen, J., Illner, K., Nordhausen, K., Oja, H., Taskinen, S. and Theis, F. (2013),
-Deflation-based and symmetric separation of uncorrrelated stationary time series,
-manuscript.}
+\cite{Miettinen, J., Illner, K., Nordhausen, K., Oja, H., Taskinen, S. and Theis, F. (2014),
+Separation of uncorrelated stationary time series using autocovariance matrices,
+http://arxiv.org/abs/1405.3388.}
 
 }
 \author{Jari Miettinen}

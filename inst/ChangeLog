@@ -3,3 +3,9 @@ LOG of the CHANGES in the package BSSasymp
 Version 1.0-0:
 
 First version released on CRAN
+
+Version 1.0-1:
+
+Corrections to functions related to FOBI and JADE. They change the values for skew components a little.
+
+References in the manuals updated.

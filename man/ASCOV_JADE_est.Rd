@@ -24,14 +24,14 @@ ASCOV_FOBI_est(X, mixed=TRUE)
  A list with the following components:
   \item{W}{estimated mean of the unmixing matrix estimate.}
   \item{COV_W}{estimated covariance matrix of the unmixing matrix estimate.}
-  \item{A}{estimated mean of the unmixing matrix estimate.}
-  \item{COV_A}{estimated covariance matrix of the unmixing matrix estimate.}
+  \item{A}{estimated mean of the mixing matrix estimate.}
+  \item{COV_A}{estimated covariance matrix of the mixing matrix estimate.}
 }
 \references{
 \cite{Ilmonen, P., Nevalainen, J. and Oja, H. (2010), Characteristics of multivariate
 distributions and the invariant coordinate system, \emph{Statistics and Probability Letters}, 80, 1844--1853.}
 
-\cite{Miettinen, J., Nordhausen, K., Oja, H. and Taskinen S. (2013), 4th Moments and Their Applications in ICA, manuscript.}
+\cite{Miettinen, J., Nordhausen, K., Oja, H. and Taskinen S. (2014), Fourth Moments and Independent Component Analysis, http://arxiv.org/abs/1406.4765.}
 }
 \author{Jari Miettinen}
 
