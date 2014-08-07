@@ -11,8 +11,8 @@ Description: The package includes functions to compute the asymptotic covariance
 \tabular{ll}{
 Package: \tab BSSasymp\cr
 Type: \tab Package\cr
-Version: \tab 1.0-1\cr
-Date: \tab 2014-06-19\cr
+Version: \tab 1.0-2\cr
+Date: \tab 2014-08-07\cr
 License: \tab GPL (>= 2)\cr
 }
 

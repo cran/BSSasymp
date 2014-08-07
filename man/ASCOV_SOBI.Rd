@@ -27,6 +27,10 @@ AR or ARMA coefficients can be transformed to MA coefficients by using \code{\li
 The \eqn{ij}th entry of Beta is \eqn{E[Z_{it}^2Z_{jt}^2]}, where \eqn{Z_{it}} are the innovations of \eqn{i}th source component such that \eqn{E[Z_{it}]=0} and \eqn{E[Z_{it}^2]=1}.      
  
 The order of the estimated components is fixed so that the sums of their squared autocovariances over \code{taus} are in a decreasing order. The signs of the components are fixed so that the sum of the elements of each row of the unmixing matrix is positive.
+
+Since the unmixing matrix has asymptotic normal distribution, we have a connection between the asymptotic variances and the minimum distance index, which is defined as 
+\deqn{MD(\hat{W},A)=\frac{1}{\sqrt{p-1}} \inf_{P D}{||PD \hat{W} A-I||,}}{MD(W.hat,A) = 1/sqrt(p-1) inf_(P D) ||P D W.hat A - I||,}
+where \eqn{\hat{W}}{W.hat} is the unmixing matrix estimate, \eqn{A}{A} is the mixing matrix, \eqn{P}{P} is a permutation matrix and \eqn{D}{D} a diagonal matrix with nonzero diagonal entries. If \eqn{\hat{W}A}{W.hat A} converges to the identity matrix, the limiting expected value of \eqn{n(p-1)MD^2} is the sum of the asymptotic variances of the off-diagonal elements of \eqn{\hat{W}A}{W.hat A}. Here \eqn{n}{n} is the sample size and \eqn{p}{p} is the number of components.
 }
 \value{
  A list with the following components:
@@ -34,8 +38,12 @@ The order of the estimated components is fixed so that the sums of their squared
   \item{COV_W}{asymptotic covariance matrix of the unmixing matrix estimate.}
   \item{A}{mean of the mixing matrix estimate.}
   \item{COV_A}{asymptotic covariance matrix of the mixing matrix estimate.}
+  \item{EMD}{The limiting expected value of \eqn{n(p-1)MD^2}, see details.}
 }
 \references{
+\cite{Ilmonen, P., Nordhausen, K., Oja, H. and Ollila, E. (2010): A New Performance Index for ICA: Properties, Computation and Asymptotic Analysis. 
+In Vigneron, V., Zarzoso, V., Moreau, E., Gribonval, R. and Vincent, E. (editors) \emph{Latent Variable Analysis and Signal Separation}, 229--236, Springer.}
+
 \cite{Miettinen, J., Nordhausen, K., Oja, H. and Taskinen, S. (2012),
 Statistical properties of a blind source separation estimator for stationary
 time series, \emph{Statistics and Probability Letters}, 82, 1865--1873.}
@@ -61,9 +69,14 @@ psi2 <- ARMAtoMA(ar=c(0.2,0.3,-0.3),lag.max=100)
 psi3 <- ARMAtoMA(ar=-0.2, ma=c(0.5,-0.1,0.4), lag.max=100)
 psi <- cbind(psi1,psi2,psi3)
 
-round(ASCOV_SOBI(psi=psi, taus=1:10, A=A)$COV_W,2)
-round(ASCOV_SOBIdefl(psi=psi, taus=1:10, A=A)$COV_W,2)
+sym <- ASCOV_SOBI(psi=psi, taus=1:10, A=A)
+defl <- ASCOV_SOBIdefl(psi=psi, taus=1:10, A=A)
 
+round(sym$COV_W,2)
+round(defl$COV_W,2)
+
+sym$EMD
+defl$EMD
 }
 
 

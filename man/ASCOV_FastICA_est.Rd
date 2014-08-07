@@ -21,8 +21,8 @@ ASCOV_FastICAdefl_est(X, gs, dgs, mixed=TRUE)
  A list with the following components:
   \item{W}{estimated mean of the unmixing matrix estimate.}
   \item{COV_W}{estimated covariance matrix of the unmixing matrix estimate.}
-  \item{A}{estimated mean of the unmixing matrix estimate.}
-  \item{COV_A}{estimated covariance matrix of the unmixing matrix estimate.}
+  \item{A}{estimated mean of the mixing matrix estimate.}
+  \item{COV_A}{estimated covariance matrix of the mixing matrix estimate.}
 }
 \references{
 \cite{Miettinen, J., Nordhausen, K., Oja, H. and Taskinen S. (2013), Deflation-based FastICA with adaptive contrast functions, manuscript.}

@@ -53,14 +53,15 @@ ASCOV_FOBI <- function(sdf,supp=NULL,A=NULL,...)
 
    } 
   }
-  
+
+  EMD<-sum(diag(ASCOV)-diag(ASCOV)*as.vector(diag(p)))
   W<-crossprod(t(P),solve(A))
   W<-crossprod(diag(sign(rowMeans(W))),W)
   A<-solve(W)
   COV_A<-crossprod(t(tcrossprod(kronecker(diag(p),A),ASCOV)),kronecker(diag(p),t(A)))
   COV_W<-crossprod(t(tcrossprod(kronecker(t(W),diag(p)),ASCOV)),kronecker(W,diag(p)))
   
-  list(W=W,COV_W=COV_W,A=A,COV_A=COV_A)
+  list(W=W,COV_W=COV_W,A=A,COV_A=COV_A,EMD=EMD)
 }
 
 ASCOV_FOBI_est <- function(X,mixed=TRUE)
@@ -126,6 +127,7 @@ ASCOV_FOBI_est <- function(X,mixed=TRUE)
   COV_A<-crossprod(t(tcrossprod(kronecker(diag(p),A),ASCOV)),kronecker(diag(p),t(A)))/n  
   COV_W<-crossprod(t(tcrossprod(kronecker(t(W),diag(p)),ASCOV)),kronecker(W,diag(p)))/n
   
+
   list(W=W,COV_W=COV_W,A=A,COV_A=COV_A)
 }
 

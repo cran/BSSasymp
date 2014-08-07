@@ -63,13 +63,14 @@ ASCOV_FastICAdefl <- function(sdf,gs,dgs,supp=NULL,A=NULL,...)
     }
   }
 
+  EMD<-sum(diag(ASCOV)-diag(ASCOV)*as.vector(diag(p)))
   W<-crossprod(t(P),solve(A))
   W<-crossprod(diag(sign(rowMeans(W))),W)
   A<-solve(W)
   COV_A<-crossprod(t(tcrossprod(kronecker(diag(p),A),ASCOV)),kronecker(diag(p),t(A)))
   COV_W<-crossprod(t(tcrossprod(kronecker(t(W),diag(p)),ASCOV)),kronecker(W,diag(p)))
   
-  list(W=W,COV_W=COV_W,A=A,COV_A=COV_A)
+  list(W=W,COV_W=COV_W,A=A,COV_A=COV_A,EMD=EMD)
 }
 
 
@@ -90,6 +91,7 @@ ASCOV_FastICAdefl_est <- function(X,gs,dgs,mixed=TRUE)
     for(j in 1:p){
       alphas[,j]<-compute_alphas(X[,j],gs,dgs)
     }
+    W<-diag(p)
   }  
   
   X<-tcrossprod(sweep(X,2,colMeans(X)),W)   

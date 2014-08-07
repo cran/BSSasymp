@@ -9,3 +9,7 @@ Version 1.0-1:
 Corrections to functions related to FOBI and JADE. They change the values for skew components a little.
 
 References in the manuals updated.
+
+Version 1.0-2
+
+New object EMD to functions ASCOV_FastICAdefl, ASCOV_FOBI, ASCOV_JADE, ASCOV_SOBI and ASCOV_SOBIdefl.
