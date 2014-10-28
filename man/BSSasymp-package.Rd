@@ -2,17 +2,17 @@
 \alias{BSSasymp-package}
 \docType{package}
 \title{
-Asymptotic covariance matrices of some BSS mixing and unmixing matrix estimates. 
+Asymptotic Covariance Matrices of Some BSS Mixing and Unmixing Matrix Estimates. 
 }
 \description{
-Description: The package includes functions to compute the asymptotic covariance matrices of mixing and unmixing matrix estimates of the following blind source separation (BSS) methods: adaptive FastICA, FOBI, JADE, AMUSE and deflation-based and symmetric SOBI. Also functions to estimate these covariances based on data are available. 
+Description: Functions to compute the asymptotic covariance matrices of mixing and unmixing matrix estimates of the following blind source separation (BSS) methods: symmetric FastICA, regular and adaptive deflation-based FastICA, FOBI, JADE, AMUSE and deflation-based and symmetric SOBI. Also functions to estimate these covariances based on data are available. 
 }
 \details{
 \tabular{ll}{
 Package: \tab BSSasymp\cr
 Type: \tab Package\cr
-Version: \tab 1.0-2\cr
-Date: \tab 2014-08-07\cr
+Version: \tab 1.1-0\cr
+Date: \tab 2014-10-27\cr
 License: \tab GPL (>= 2)\cr
 }
 

@@ -97,7 +97,7 @@ ASCOV_SOBI<-function(psi,taus,Beta=NULL,A=NULL)
     if(i!=j){
       ASV<-.C("ascov", as.double(as.vector(F_tau)),as.double(as.vector(Lambda)),
            as.double(taus),as.integer(c(i-1,j-1,p,q,K)),as.double(as.vector(Beta)),
-           res=double (2))$res
+           res=double (2),PACKAGE="BSSasymp")$res
  
       ASCOV<-ASCOV+ASV[2]*kronecker(tcrossprod(diag(p)[,i],diag(p)[,j]),tcrossprod(
              diag(p)[,j],diag(p)[,i]))+ASV[1]*kronecker(tcrossprod(diag(p)[,j],
@@ -178,7 +178,7 @@ ASCOV_SOBI_estN<-function(X,taus,mixed=TRUE,M=100)
     if(i!=j){
        ASV<-.C("ascov", as.double(as.vector(F_tau)),as.double(as.vector(Lambda)),
             as.double(taus),as.integer(c(i-1,j-1,p,M,K)),as.double(as.vector(Beta)),
-            res=double(2))$res
+            res=double(2),PACKAGE="BSSasymp")$res
  
        ASCOV<-ASCOV+ASV[2]*kronecker(tcrossprod(diag(p)[,i],diag(p)[,j]),tcrossprod(
              diag(p)[,j],diag(p)[,i]))+ASV[1]*kronecker(tcrossprod(diag(p)[,j],
@@ -294,7 +294,7 @@ ASCOV_SOBI_est<-function(X,taus,arp=NULL,maq=NULL,mixed=TRUE,M=100,...)
       if(i!=j){
         ASV<-.C("ascov", as.double(as.vector(F_tau)),as.double(as.vector(Lambda)),
         as.double(taus),as.integer(c(i-1,j-1,p,M,K)),as.double(as.vector(Beta)),
-        res=double (2))$res
+        res=double (2),PACKAGE="BSSasymp")$res
  
         ASCOV<-ASCOV+ASV[2]*kronecker(tcrossprod(diag(p)[,i],diag(p)[,j]),tcrossprod(
              diag(p)[,j],diag(p)[,i]))+ASV[1]*kronecker(tcrossprod(diag(p)[,j],

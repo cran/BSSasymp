@@ -13,3 +13,9 @@ References in the manuals updated.
 Version 1.0-2
 
 New object EMD to functions ASCOV_FastICAdefl, ASCOV_FOBI, ASCOV_JADE, ASCOV_SOBI and ASCOV_SOBIdefl.
+
+Version 1.1-0
+
+- New functions ASCOV_FastICAsym, ASCOV_FastICAsym_est, alphas and CRB.
+
+- Functions ASCOV_FastICAdefl and ASCOV_FastICAdefl_est can be used also for other extraction orders than the optimal one. The functioins return now the nonlinearities which are used.
