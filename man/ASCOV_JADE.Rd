@@ -37,10 +37,10 @@ where \eqn{\hat{W}}{W.hat} is the unmixing matrix estimate, \eqn{A}{A} is the mi
 \cite{Ilmonen, P., Nevalainen, J. and Oja, H. (2010), Characteristics of multivariate
 distributions and the invariant coordinate system, \emph{Statistics and Probability Letters}, 80, 1844--1853.}
 
-\cite{Ilmonen, P., Nordhausen, K., Oja, H. and Ollila, E. (2010): A New Performance Index for ICA: Properties, Computation and Asymptotic Analysis. 
+\cite{Ilmonen, P., Nordhausen, K., Oja, H. and Ollila, E. (2010), A New Performance Index for ICA: Properties, Computation and Asymptotic Analysis. 
 In Vigneron, V., Zarzoso, V., Moreau, E., Gribonval, R. and Vincent, E. (editors) \emph{Latent Variable Analysis and Signal Separation}, 229--236, Springer.}
 
-\cite{Miettinen, J., Nordhausen, K., Oja, H. and Taskinen S. (2014), Fourth Moments and Independent Component Analysis, http://arxiv.org/abs/1406.4765.}
+\cite{Miettinen, J., Taskinen S., Nordhausen, K. and Oja, H. (2015), Fourth Moments and Independent Component Analysis, \emph{Statistical Science}, 30, 372--390.}
 }
 \author{Jari Miettinen}
 

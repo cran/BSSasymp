@@ -1,5 +1,6 @@
 \name{ASCOV_FastICAsym_est}
 \alias{ASCOV_FastICAsym_est}
+\alias{ASCOV_FastICAsym2_est}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Asymptotic covariance matrix of symmetric FastICA estimate}
@@ -8,6 +9,9 @@ Symmetric FastICA solves the blind source separation problem in the case of inde
 }
 \usage{
 ASCOV_FastICAsym_est(X, G, g, dg, mixed=TRUE)
+
+ASCOV_FastICAsym2_est(X, G, g, dg, mixed=TRUE)
+
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

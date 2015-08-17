@@ -31,7 +31,7 @@ ASCOV_FOBI_est(X, mixed=TRUE)
 \cite{Ilmonen, P., Nevalainen, J. and Oja, H. (2010), Characteristics of multivariate
 distributions and the invariant coordinate system, \emph{Statistics and Probability Letters}, 80, 1844--1853.}
 
-\cite{Miettinen, J., Nordhausen, K., Oja, H. and Taskinen S. (2014), Fourth Moments and Independent Component Analysis, http://arxiv.org/abs/1406.4765.}
+\cite{Miettinen, J., Taskinen S., Nordhausen, K. and Oja, H. (2015), Fourth Moments and Independent Component Analysis, \emph{Statistical Science}, 30, 372--390.}
 }
 \author{Jari Miettinen}
 

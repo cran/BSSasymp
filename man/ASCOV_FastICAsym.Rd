@@ -1,20 +1,23 @@
 \name{ASCOV_FastICAsym}
 \alias{ASCOV_FastICAsym}
+\alias{ASCOV_FastICAsym2}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Asymptotic covariance matrix of symmetric FastICA estimate}
+Asymptotic covariance matrix of symmetric FastICA estimates}
 \description{
-Symmetric FastICA solves the blind source separation problem in the case of independent components. This function computes the asymptotic covariance matrices of symmetric FastICA mixing and unmixing matrix estimates.
+Symmetric FastICA estimators solves the blind source separation problem in the case of independent components. These functions compute the asymptotic covariance matrices of the regular and the squared symmetric FastICA mixing and unmixing matrix estimates.
 
 }
 \usage{
 ASCOV_FastICAsym(sdf, G, g, dg, supp=NULL, A=NULL, ...)
 
+ASCOV_FastICAsym2(sdf, G, g, dg, supp=NULL, A=NULL, ...)
+
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{sdf}{a list of density functions of the sources scaled so that the mean is 0 and variance is 1.}
-  \item{G}{the integral function of the nonlinearity function.}
+  \item{G}{the integral function of the nonlinearity function, see details.}
   \item{g}{the nonlinearity function.}
   \item{dg}{the first derivative function of the nonlinearity function.}
   \item{supp}{a two column matrix, where each row gives the lower and the upper limit used in numerical integration for the corresponding source component which is done using \code{\link[stats]{integrate}}. Can be \code{NULL} if each support is the whole real line.}
@@ -40,6 +43,8 @@ where \eqn{\hat{W}}{W.hat} is the unmixing matrix estimate, \eqn{A}{A} is the mi
 10, 626-634.}
 
 \cite{Wei, T. (2014), The convergence and asymptotic analysis of the generalized symmetric FastICA algorithm, http://arxiv.org/abs/1408.0145.}
+
+\cite{Miettinen, J., Nordhausen, K., Oja, H., Taskinen, S. and Virta, J. (2015), The squared symmetric FastICA estimator, submitted. }
 
 }
 \author{Jari Miettinen}

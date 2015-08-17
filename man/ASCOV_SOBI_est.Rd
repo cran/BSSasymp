@@ -12,11 +12,13 @@ The symmetric and deflation-based SOBI methods solve the blind source separation
 \usage{
 ASCOV_SOBI_estN(X, taus, mixed=TRUE, M=100)
 
-ASCOV_SOBI_est(X, taus, arp=NULL, maq=NULL, mixed=TRUE, M=100,...)
+ASCOV_SOBI_est(X, taus, arp=NULL, maq=NULL, mixed=TRUE, 
+               M=100, ...)
 
 ASCOV_SOBIdefl_estN(X, taus, mixed=TRUE,  M=100)
 
-ASCOV_SOBIdefl_est(X, taus, arp=NULL, maq=NULL, mixed=TRUE, M=100,...)
+ASCOV_SOBIdefl_est(X, taus, arp=NULL, maq=NULL, mixed=TRUE, 
+                   M=100, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -28,7 +30,7 @@ ASCOV_SOBIdefl_est(X, taus, arp=NULL, maq=NULL, mixed=TRUE, M=100,...)
   \item{M}{the number of autocovariance matrices used for the estimation of the covariance matrices, see details.}
   \item{\dots}{arguments to be passed to \code{\link[stats]{arima}}.}
 }
-\details{ Functions ASCOV_SOBI_estN and ASCOV_SOBIdefl_estN assume that the innovations of the components are gaussian. Therefore, they are faster than ASCOV_SOBI_est and ASCOV_SOBIdefl_est, which estimate the fourth moments of the innovations by estimating the ARMA coefficients of the time series.
+\details{ Functions ASCOV_SOBI_estN and ASCOV_SOBIdefl_estN assume that the innovations of the components are gaussian. Therefore, they are faster than ASCOV_SOBI_est and  ASCOV_SOBI-defl_est, which estimate the fourth moments of the innovations by estimating the ARMA coefficients of the time series.
 Fitting the univariate ARMA coefficients is done using the function \code{\link[stats]{arima}} based on the orders provided by \code{arp} and \code{maq}.
 
 The estimation is mostly based on autocovariance matrices and all non-zero matrices should be included. On the other hand, too large value of \code{M} increases the computation time and it may even reduce the estimation accuracy.  
