@@ -29,7 +29,7 @@ D_lm <- function(F, l, m, Beta)
 }
 
 
-ASCOV_SOBI <- function(psi,taus,Beta=NULL,A=NULL)
+ASCOV_SOBI <- function(psi, taus, a=2, Beta=NULL, A=NULL)
 {
   p <- dim(psi)[2]
   q <- dim(psi)[1]
@@ -95,7 +95,7 @@ ASCOV_SOBI <- function(psi,taus,Beta=NULL,A=NULL)
   for(j in 1:p){
    for(i in 1:p){
     if(i!=j){
-      ASV <- .C("ascov", as.double(as.vector(F_tau)),as.double(as.vector(Lambda)), as.double(taus),as.integer(c(i-1,j-1,p,q,K)),as.double(as.vector(Beta)),res=double(2), PACKAGE="BSSasymp")$res
+      ASV <- .C("ascov", as.double(as.vector(F_tau)),as.double(as.vector(Lambda)), as.double(taus),as.integer(c(i-1,j-1,p,q,K)),as.double(as.vector(Beta)),as.double(a),res=double(2), PACKAGE="BSSasymp")$res
  
       ASCOV <- ASCOV+ASV[2]*kronecker(tcrossprod(diag(p)[,i],diag(p)[,j]),tcrossprod(diag(p)[,j],diag(p)[,i]))+ASV[1]*kronecker(tcrossprod(diag(p)[,j],diag(p)[,j]),tcrossprod(diag(p)[,i],diag(p)[,i]))
     }  
@@ -117,7 +117,7 @@ ASCOV_SOBI <- function(psi,taus,Beta=NULL,A=NULL)
 
 # M is the number of autocovariances used in estimation.
 
-ASCOV_SOBI_estN <- function(X, taus, mixed=TRUE, M=100)
+ASCOV_SOBI_estN <- function(X, taus, mixed=TRUE, M=100, a=2)
 {
   p <- dim(X)[2]
   T <- dim(X)[1]
@@ -171,7 +171,7 @@ ASCOV_SOBI_estN <- function(X, taus, mixed=TRUE, M=100)
   for(j in 1:p){
    for(i in 1:p){
     if(i!=j){
-       ASV <- .C("ascov", as.double(as.vector(F_tau)),as.double(as.vector(Lambda)), as.double(taus),as.integer(c(i-1,j-1,p,M,K)),as.double(as.vector(Beta)),res=double(2), PACKAGE="BSSasymp")$res
+       ASV <- .C("ascov", as.double(as.vector(F_tau)),as.double(as.vector(Lambda)), as.double(taus),as.integer(c(i-1,j-1,p,M,K)),as.double(as.vector(Beta)),as.double(a),res=double(2), PACKAGE="BSSasymp")$res
  
        ASCOV <- ASCOV+ASV[2]*kronecker(tcrossprod(diag(p)[,i],diag(p)[,j]),tcrossprod(diag(p)[,j],diag(p)[,i]))+ASV[1]*kronecker(tcrossprod(diag(p)[,j],diag(p)[,j]), tcrossprod(diag(p)[,i],diag(p)[,i]))
    }  
@@ -188,7 +188,7 @@ ASCOV_SOBI_estN <- function(X, taus, mixed=TRUE, M=100)
 }
 
 
-ASCOV_SOBI_est <- function(X, taus, arp=NULL, maq=NULL, mixed=TRUE, M=100, ...)
+ASCOV_SOBI_est <- function(X, taus, arp=NULL, maq=NULL, mixed=TRUE, M=100, a=2, ...)
 {
   p <- dim(X)[2]
   T <- dim(X)[1]
@@ -200,8 +200,8 @@ ASCOV_SOBI_est <- function(X, taus, arp=NULL, maq=NULL, mixed=TRUE, M=100, ...)
     
   X <- tcrossprod(sweep(X,2,colMeans(X)),W)  
 
-  if(is.null(arp)) arp <- rep(3,p) 
-  if(is.null(maq)) maq <- rep(4,p)
+  if(is.null(arp)) arp <- rep(1,p) 
+  if(is.null(maq)) maq <- rep(1,p)
 
   Psi <- matrix(0,M+1,p)
   for(i in 1:p){
@@ -282,7 +282,7 @@ ASCOV_SOBI_est <- function(X, taus, arp=NULL, maq=NULL, mixed=TRUE, M=100, ...)
   for(j in 1:p){
     for(i in 1:p){
       if(i!=j){
-        ASV <- .C("ascov", as.double(as.vector(F_tau)),as.double(as.vector(Lambda)), as.double(taus),as.integer(c(i-1,j-1,p,M,K)),as.double(as.vector(Beta)),res=double (2), PACKAGE="BSSasymp")$res
+        ASV <- .C("ascov", as.double(as.vector(F_tau)),as.double(as.vector(Lambda)), as.double(taus),as.integer(c(i-1,j-1,p,M,K)),as.double(as.vector(Beta)),as.double(a),res=double(2), PACKAGE="BSSasymp")$res
  
         ASCOV <- ASCOV+ASV[2]*kronecker(tcrossprod(diag(p)[,i],diag(p)[,j]),tcrossprod(diag(p)[,j],diag(p)[,i]))+ASV[1]*kronecker(tcrossprod(diag(p)[,j],diag(p)[,j]),tcrossprod(diag(p)[,i],diag(p)[,i]))
       }  

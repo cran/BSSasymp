@@ -10,10 +10,10 @@ Asymptotic covariance matrix of symmetric and deflation-based SOBI estimates}
 The symmetric and deflation-based SOBI methods solve the blind source separation problem in the case of second order stationary time series sources by jointly diagonalizing the covariance matrix and several autocovariance matrices at different lags. The functions compute an estimate of the covariance matrix of a SOBI estimate for the mixing or the unmixing matrix, under the assumption that the sources are \eqn{MA(\infty)} time series. Notice that, since AMUSE method is a special case of SOBI, also an estimate of the covariance matrix of an AMUSE estimate can be computed using these functions. 
 }
 \usage{
-ASCOV_SOBI_estN(X, taus, mixed=TRUE, M=100)
+ASCOV_SOBI_estN(X, taus, mixed=TRUE, M=100, a=2)
 
 ASCOV_SOBI_est(X, taus, arp=NULL, maq=NULL, mixed=TRUE, 
-               M=100, ...)
+               M=100, a=2, ...)
 
 ASCOV_SOBIdefl_estN(X, taus, mixed=TRUE,  M=100)
 
@@ -28,6 +28,7 @@ ASCOV_SOBIdefl_est(X, taus, arp=NULL, maq=NULL, mixed=TRUE,
   \item{maq}{a vector containing the MA orders used for the estimation of ARMA coefficients.}
   \item{mixed}{logical, see details.}
   \item{M}{the number of autocovariance matrices used for the estimation of the covariance matrices, see details.}
+  \item{a}{numeric, see details}
   \item{\dots}{arguments to be passed to \code{\link[stats]{arima}}.}
 }
 \details{ Functions ASCOV_SOBI_estN and ASCOV_SOBIdefl_estN assume that the innovations of the components are gaussian. Therefore, they are faster than ASCOV_SOBI_est and  ASCOV_SOBI-defl_est, which estimate the fourth moments of the innovations by estimating the ARMA coefficients of the time series.
@@ -36,6 +37,10 @@ Fitting the univariate ARMA coefficients is done using the function \code{\link[
 The estimation is mostly based on autocovariance matrices and all non-zero matrices should be included. On the other hand, too large value of \code{M} increases the computation time and it may even reduce the estimation accuracy.  
 
 If \code{mixed} is TRUE, then \code{X} will be transformed by the corresponding SOBI estimate. The option FALSE can be used, for example, to estimate the covariance when \code{X} are source estimates given by some other method than SOBI.
+
+The symmetric SOBI estimator maximizes the sum of squares of the diagonal elements of the autocovariance matrices. Different SOBI estimators are obtained when the diagonality of \eqn{p\times p}{pxp} matrices \eqn{B_1,\dots,B_K}{B_1,...,B_K} is measured by
+\deqn{\sum_{k=1}^K\sum_{i=1}^p |(B_k)_{ii}|^a} 
+with \eqn{a>1}. The diagonality measure can be selected using the argument \code{a}.
 }
 \value{
  A list with the following components:
@@ -45,6 +50,9 @@ If \code{mixed} is TRUE, then \code{X} will be transformed by the corresponding 
   \item{COV_A}{estimated covariance matrix of the mixing matrix estimate.}
 }
 \references{
+\cite{Miettinen, J. (2015): Alternative diagonality criteria for SOBI.
+In Nordhausen, K. and Taskinen, S. (editors), \emph{Modern Nonparametric, Robust and Multivariate methods, Festschrift in Honour of Hannu Oja}, 455--469, Springer.}
+
 \cite{Miettinen, J., Nordhausen, K., Oja, H. and Taskinen, S. (2012),
 Statistical properties of a blind source separation estimator for stationary
 time series, \emph{Statistics and Probability Letters}, 82, 1865--1873.}
@@ -52,9 +60,9 @@ time series, \emph{Statistics and Probability Letters}, 82, 1865--1873.}
 \cite{Miettinen, J., Nordhausen, K., Oja, H. and Taskinen, S. (2014),
 Deflation-based separation of uncorrelated stationary time series, \emph{Journal of Multivariate Analysis}, 123, 214--227.}
 
-\cite{Miettinen, J., Illner, K., Nordhausen, K., Oja, H., Taskinen, S. and Theis, F. (2014),
+\cite{Miettinen, J., Illner, K., Nordhausen, K., Oja, H., Taskinen, S. and Theis, F. (2015),
 Separation of uncorrelated stationary time series using autocovariance matrices,
-http://arxiv.org/abs/1405.3388.}
+\emph{Journal of Time Series Analysis}, in print, DOI: 10.1111/jtsa.12159.}
 
 }
 \author{Jari Miettinen}

@@ -59,8 +59,34 @@
     return D;
   }
 
-  
-  void ascov(double *F, double *Lambda, double *taus, int *nk, double *B, double *result)
+  double absd(double x)
+  {
+   double res;
+   if(x>0){ 
+    res = x;  
+   }else res = -x;
+   
+   return res; 
+  }
+ 
+  double sign(double x)
+  {
+   int res;
+   if(x>0){ 
+    res = 1;  
+   }else res = -1;
+   
+   return res; 
+  }
+
+  double g(double x, double a)
+  {
+    double res;
+    res = sign(x)*a*pow(absd(x),a-1);
+    return res;
+  }
+
+   void ascov(double *F, double *Lambda, double *taus, int *nk, double *B, double *a, double *result)
   {
     int i=nk[0];
     int j=nk[1];
@@ -71,37 +97,39 @@
     int l;
     int m;
  
+    double a1 = a[0];
     double ASV = 0;
     double ASCOV = 0;    
     double sl = 0;
     double sl2 = 0;
   
     for(k=0; k<K; k++){
-      ASV += (Lambda[i+i*p+k*p*p]-Lambda[j+j*p+k*p*p])*(Lambda[i+i*p+k*p*p]-
-             Lambda[j+j*p+k*p*p])*D_lm(F,p,q,i,j,taus[k],taus[k],B);
+      ASV += (g(Lambda[i+i*p+k*p*p],a1)-g(Lambda[j+j*p+k*p*p],a1))*
+             (g(Lambda[i+i*p+k*p*p],a1)-g(Lambda[j+j*p+k*p*p],a1))*
+             D_lm(F,p,q,i,j,taus[k],taus[k],B);
     }
  
     if(K>1){
     for(l=0; l<(K-1); l++){
       for(m=(l+1); m<K; m++){
-          ASV += 2*(Lambda[i+i*p+l*p*p]-Lambda[j+j*p+l*p*p])*(Lambda[i+i*p+m*p*p]-
-                      Lambda[j+j*p+m*p*p])*D_lm(F,p,q,i,j,taus[l],taus[m],B);
+          ASV += 2*(g(Lambda[i+i*p+l*p*p],a1)-g(Lambda[j+j*p+l*p*p],a1))*
+                 (g(Lambda[i+i*p+m*p*p],a1)-g(Lambda[j+j*p+m*p*p],a1))*
+                 D_lm(F,p,q,i,j,taus[l],taus[m],B);
         }
        }
       }      
      
      for(k=0; k<K; k++){
-      sl += Lambda[i+i*p+k*p*p]*Lambda[j+j*p+k*p*p]-
-            Lambda[i+i*p+k*p*p]*Lambda[i+i*p+k*p*p];
-      sl2 += (Lambda[j+j*p+k*p*p]-Lambda[i+i*p+k*p*p])*
-             (Lambda[j+j*p+k*p*p]-Lambda[i+i*p+k*p*p]);
+      sl += (g(Lambda[j+j*p+k*p*p],a1)-g(Lambda[i+i*p+k*p*p],a1))*Lambda[i+i*p+k*p*p];
+      sl2 += (g(Lambda[i+i*p+k*p*p],a1)-g(Lambda[j+j*p+k*p*p],a1))*
+             (Lambda[i+i*p+k*p*p]-Lambda[j+j*p+k*p*p]);
    
      }
    
      ASV += sl*sl*D_lm(F,p,q,i,j,0,0,B);
 
       for(k=0; k<K; k++){
-        ASV += 2*sl*(Lambda[i+i*p+k*p*p]-Lambda[j+j*p+k*p*p])*
+        ASV += 2*sl*(g(Lambda[i+i*p+k*p*p],a1)-g(Lambda[j+j*p+k*p*p],a1))*
                D_lm(F,p,q,i,j,taus[k],0,B);
       } 
 
@@ -110,18 +138,15 @@
       ASCOV -= ASV;
     
       for(k=0; k<K; k++){
-        ASCOV += -((Lambda[i+i*p+k*p*p]-Lambda[j+j*p+k*p*p])*
-                   D_lm(F,p,q,i,j,taus[k],0,B)-(Lambda[i+i*p+k*p*p]*
-                  Lambda[i+i*p+k*p*p]-Lambda[j+j*p+k*p*p]*Lambda[i+i*p+k*p*p])*
-                  D_lm(F,p,q,i,j,0,0,B))/sl2;
+        ASCOV -= ((g(Lambda[i+i*p+k*p*p],a1)-g(Lambda[j+j*p+k*p*p],a1))*
+                 D_lm(F,p,q,i,j,taus[k],0,B)+sl*D_lm(F,p,q,i,j,0,0,B)/K)/sl2;
       }  
-
+      
    
      result[0] = ASV;
      result[1] = ASCOV;
-    
-
   }
+
 
   void ascov_deflji(double *F, double *Lambda, double *taus, int *nk, double *B, double *result)
   {
@@ -237,5 +262,82 @@
     result[0] = D_lm(F,p,q,i,j,l,m,B);
   }
 
+  void ascov_all(double *F, double *Lambda, double *taus, int *nk, double *B, double *result)
+  {
+    int i;
+    int j;
+    int p=nk[0];
+    int q=nk[1];
+    int K=nk[2];
+    int k;
+    int l;
+    int m;
+    int n=0;
  
+    double ASVi;
+    double ASVj;    
+    double sli;
+    double slj;
+    double sl2;
+  
+    for(i=0; i<(p-1); i++){
+     for(j=(i+1); j<p; j++){
+    
+      ASVi=0;
+      ASVj=0;
+      sli=0;
+      slj=0;
+      sl2=0;
+
+      for(k=0; k<K; k++){
+       ASVi += (Lambda[i+i*p+k*p*p]-Lambda[j+j*p+k*p*p])*(Lambda[i+i*p+k*p*p]-
+               Lambda[j+j*p+k*p*p])*D_lm(F,p,q,i,j,taus[k],taus[k],B);
+       ASVj += (Lambda[j+j*p+k*p*p]-Lambda[i+i*p+k*p*p])*(Lambda[j+j*p+k*p*p]-
+               Lambda[i+i*p+k*p*p])*D_lm(F,p,q,j,i,taus[k],taus[k],B);
+      }
+ 
+      if(K>1){
+      for(l=0; l<(K-1); l++){
+        for(m=(l+1); m<K; m++){
+            ASVi += 2*(Lambda[i+i*p+l*p*p]-Lambda[j+j*p+l*p*p])*(Lambda[i+i*p+m*p*p]-
+                      Lambda[j+j*p+m*p*p])*D_lm(F,p,q,i,j,taus[l],taus[m],B);
+            ASVj += 2*(Lambda[j+j*p+l*p*p]-Lambda[i+i*p+l*p*p])*(Lambda[j+j*p+m*p*p]-
+                      Lambda[i+i*p+m*p*p])*D_lm(F,p,q,j,i,taus[l],taus[m],B);
+        }
+      }
+      }      
+     
+      for(k=0; k<K; k++){
+       sli += Lambda[i+i*p+k*p*p]*Lambda[j+j*p+k*p*p]-
+             Lambda[i+i*p+k*p*p]*Lambda[i+i*p+k*p*p];
+       slj += Lambda[j+j*p+k*p*p]*Lambda[i+i*p+k*p*p]-
+             Lambda[j+j*p+k*p*p]*Lambda[j+j*p+k*p*p];
+
+       sl2 += (Lambda[j+j*p+k*p*p]-Lambda[i+i*p+k*p*p])*
+              (Lambda[j+j*p+k*p*p]-Lambda[i+i*p+k*p*p]);
+   
+      }
+   
+      ASVi += sli*sli*D_lm(F,p,q,i,j,0,0,B);
+      ASVj += slj*slj*D_lm(F,p,q,j,i,0,0,B);
+
+      for(k=0; k<K; k++){
+        ASVi += 2*sli*(Lambda[i+i*p+k*p*p]-Lambda[j+j*p+k*p*p])*
+               D_lm(F,p,q,i,j,taus[k],0,B);
+        ASVj += 2*slj*(Lambda[j+j*p+k*p*p]-Lambda[i+i*p+k*p*p])*
+               D_lm(F,p,q,j,i,taus[k],0,B);
+
+      } 
+
+      ASVi = ASVi/(sl2*sl2);
+      ASVj = ASVj/(sl2*sl2);
+      
+   
+      result[2*n] = ASVi;
+      result[2*n+1] = ASVj;
+      n += 1;
+    }
+   }
+  }
+
 }

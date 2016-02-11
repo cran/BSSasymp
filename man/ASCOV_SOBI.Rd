@@ -8,7 +8,7 @@ Asymptotic covariance matrix of symmetric and deflation-based SOBI estimates}
 The symmetric and deflation-based SOBI methods solve the blind source separation problem in the case of second order stationary time series sources by jointly diagonalizing the covariance matrix and several autocovariance matrices at different lags. The functions compute the asymptotic covariance matrices of a SOBI estimates for the mixing or the unmixing matrices, when the sources are \eqn{MA(\infty)} time series. Notice that, since AMUSE method is a special case of SOBI, also the asymptotic covariance matrix of an AMUSE estimate can be computed using these functions. 
 }
 \usage{
-ASCOV_SOBI(psi, taus, Beta=NULL, A=NULL)
+ASCOV_SOBI(psi, taus, a=2, Beta=NULL, A=NULL)
 
 ASCOV_SOBIdefl(psi, taus, Beta=NULL, A=NULL)
 }
@@ -16,6 +16,7 @@ ASCOV_SOBIdefl(psi, taus, Beta=NULL, A=NULL)
 \arguments{
   \item{psi}{a numeric matrix containing the MA-coefficients of the time series, see details.}
   \item{taus}{a vector of integers for the lags.}
+  \item{a}{numeric, see details.}
   \item{Beta}{a matrix of fourth moments of the innovations, see details.}
   \item{A}{the mixing matrix, identity matrix as default.}
 }
@@ -31,6 +32,10 @@ The order of the estimated components is fixed so that the sums of their squared
 Since the unmixing matrix has asymptotic normal distribution, we have a connection between the asymptotic variances and the minimum distance index, which is defined as 
 \deqn{MD(\hat{W},A)=\frac{1}{\sqrt{p-1}} \inf_{P D}{||PD \hat{W} A-I||,}}{MD(W.hat,A) = 1/sqrt(p-1) inf_(P D) ||P D W.hat A - I||,}
 where \eqn{\hat{W}}{W.hat} is the unmixing matrix estimate, \eqn{A}{A} is the mixing matrix, \eqn{P}{P} is a permutation matrix and \eqn{D}{D} a diagonal matrix with nonzero diagonal entries. If \eqn{\hat{W}A}{W.hat A} converges to the identity matrix, the limiting expected value of \eqn{n(p-1)MD^2} is the sum of the asymptotic variances of the off-diagonal elements of \eqn{\hat{W}A}{W.hat A}. Here \eqn{n}{n} is the sample size and \eqn{p}{p} is the number of components.
+
+The symmetric SOBI estimator maximizes the sum of squares of the diagonal elements of the autocovariance matrices. Different SOBI estimators are obtained when the diagonality of \eqn{p\times p}{pxp} matrices \eqn{B_1,\dots,B_K}{B_1,...,B_K} is measured by
+\deqn{\sum_{k=1}^K\sum_{i=1}^p |(B_k)_{ii}|^a} 
+with \eqn{a>1}. The diagonality measure can be selected using the argument \code{a}. 
 }
 \value{
  A list with the following components:
@@ -44,6 +49,9 @@ where \eqn{\hat{W}}{W.hat} is the unmixing matrix estimate, \eqn{A}{A} is the mi
 \cite{Ilmonen, P., Nordhausen, K., Oja, H. and Ollila, E. (2010): A New Performance Index for ICA: Properties, Computation and Asymptotic Analysis. 
 In Vigneron, V., Zarzoso, V., Moreau, E., Gribonval, R. and Vincent, E. (editors) \emph{Latent Variable Analysis and Signal Separation}, 229--236, Springer.}
 
+\cite{Miettinen, J. (2015): Alternative diagonality criteria for SOBI.
+In Nordhausen, K. and Taskinen, S. (editors) \emph{Modern Nonparametric, Robust and Multivariate methods, Festschrift in Honour of Hannu Oja}, 455--469, Springer.}
+
 \cite{Miettinen, J., Nordhausen, K., Oja, H. and Taskinen, S. (2012),
 Statistical properties of a blind source separation estimator for stationary
 time series, \emph{Statistics and Probability Letters}, 82, 1865--1873.}
@@ -51,9 +59,9 @@ time series, \emph{Statistics and Probability Letters}, 82, 1865--1873.}
 \cite{Miettinen, J., Nordhausen, K., Oja, H. and Taskinen, S. (2014),
 Deflation-based separation of uncorrelated stationary time series, \emph{Journal of Multivariate Analysis}, 123, 214--227.}
 
-\cite{Miettinen, J., Illner, K., Nordhausen, K., Oja, H., Taskinen, S. and Theis, F. (2014),
+\cite{Miettinen, J., Illner, K., Nordhausen, K., Oja, H., Taskinen, S. and Theis, F. (2015),
 Separation of uncorrelated stationary time series using autocovariance matrices,
-http://arxiv.org/abs/1405.3388.}
+\emph{Journal of Time Series Analysis}, in print, DOI: 10.1111/jtsa.12159.}
 
 }
 \author{Jari Miettinen}
