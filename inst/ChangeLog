@@ -31,3 +31,8 @@ New functions ASCOV_FastICAsym2 and ASCOV_FastICAsym2_est.
 Version 1.1-2 
 
 New functions eSOBI and aSOBI, and new object taus_def. The functions ASCOV_SOBI, ASCOV_SOBI_estN and ASCOV_SOBI_est are modified so that they cover now also a family of SOBI estimators using non-standard diagonality criterion.
+
+Version 1.2-0
+
+Reference to a JSS publication is added. 
+
