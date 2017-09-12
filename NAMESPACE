@@ -4,4 +4,4 @@ importFrom(JADE, JADE, k_JADE, FOBI, SOBI)
 
 export(alphas, ASCOV_FastICAdefl, ASCOV_FastICAdefl_est, ASCOV_FastICAsym, ASCOV_FastICAsym_est, ASCOV_FastICAsym2, ASCOV_FastICAsym2_est, ASCOV_FOBI, ASCOV_FOBI_est, ASCOV_JADE, ASCOV_JADE_est, ASCOV_SOBI, ASCOV_SOBI_est, ASCOV_SOBI_estN, ASCOV_SOBIdefl, ASCOV_SOBIdefl_est, ASCOV_SOBIdefl_estN, CRB, eSOBI, taus_def, aSOBI)
 
-useDynLib(BSSasymp)
+useDynLib(BSSasymp, .registration = TRUE)

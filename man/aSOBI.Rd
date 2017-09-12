@@ -19,7 +19,7 @@ aSOBI(X, k=12, a=4, eps=1e-06, maxiter=1000)
 \details{ 
 The classical SOBI estimator maximizes the sum of squares of the diagonal elements of the autocovariance matrices. A family of alternative SOBI estimators is obtained when the diagonality of \eqn{p\times p}{pxp} matrices \eqn{B_1,\dots,B_K}{B_1,...,B_K} is measured by
 \deqn{\sum_{k=1}^K\sum_{i=1}^p |(B_k)_{ii}|^a} 
-with \eqn{a>1}. The choice \eqn{a=2} gives the classical SOBI estimate and it can be computed more efficiently using function \code{\link[JADE]{SOBI}}.
+with \eqn{a>1}.
 }
 \value{
  A list with class 'bss' containing the following components:

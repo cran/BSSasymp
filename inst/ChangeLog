@@ -1,26 +1,18 @@
 LOG of the CHANGES in the package BSSasymp
 
-Version 1.0-0:
+Version 1.2-1
 
-First version released on CRAN
-
-Version 1.0-1:
-
-Corrections to functions related to FOBI and JADE. They change the values for skew components a little.
-
-References in the manuals updated.
-
-Version 1.0-2
-
-New object EMD to functions ASCOV_FastICAdefl, ASCOV_FOBI, ASCOV_JADE, ASCOV_SOBI and ASCOV_SOBIdefl.
+The email address of the maintainer of the package changed. 
 
 
-Version 1.1-0
+Version 1.2-0
 
- 
-New functions ASCOV_FastICAsym, ASCOV_FastICAsym_est, alphas and CRB.
+Reference to a JSS publication added. 
 
-Functions ASCOV_FastICAdefl and ASCOV_FastICAdefl_est can be used also for other extraction orders than the optimal one. The functions return now the nonlinearities which are used.
+
+Version 1.1-2 
+
+New functions eSOBI and aSOBI, and new object taus_def. The functions ASCOV_SOBI, ASCOV_SOBI_estN and ASCOV_SOBI_est are modified so that they cover now also a family of SOBI estimators using non-standard diagonality criterion.
 
 
 Version 1.1-1
@@ -28,11 +20,25 @@ Version 1.1-1
 New functions ASCOV_FastICAsym2 and ASCOV_FastICAsym2_est.
 
 
-Version 1.1-2 
+Version 1.1-0
+ 
+New functions ASCOV_FastICAsym, ASCOV_FastICAsym_est, alphas and CRB.
 
-New functions eSOBI and aSOBI, and new object taus_def. The functions ASCOV_SOBI, ASCOV_SOBI_estN and ASCOV_SOBI_est are modified so that they cover now also a family of SOBI estimators using non-standard diagonality criterion.
+Functions ASCOV_FastICAdefl and ASCOV_FastICAdefl_est can be used also for other extraction orders than the optimal one. The functions return now the nonlinearities which are used.
 
-Version 1.2-0
 
-Reference to a JSS publication is added. 
+Version 1.0-2
 
+New object EMD to functions ASCOV_FastICAdefl, ASCOV_FOBI, ASCOV_JADE, ASCOV_SOBI and ASCOV_SOBIdefl.
+
+
+Version 1.0-1:
+
+Corrections to functions related to FOBI and JADE. They change the values for skew components a little.
+
+References in the manuals updated.
+
+
+Version 1.0-0:
+
+First version released on CRAN.
