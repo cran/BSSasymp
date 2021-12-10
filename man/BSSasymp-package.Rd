@@ -11,8 +11,8 @@ Description: Functions to compute the asymptotic covariance matrices of mixing a
 \tabular{ll}{
 Package: \tab BSSasymp\cr
 Type: \tab Package\cr
-Version: \tab 1.2-2\cr
-Date: \tab 2021-12-08\cr
+Version: \tab 1.2-3\cr
+Date: \tab 2021-12-10\cr
 License: \tab GPL (>= 2)\cr
 }
 
